@@ -1,13 +1,8 @@
-import {useState} from 'react'
-import {Element, Rectangle} from './components/Rectangle/Rectangle'
+import {Rectangle, selectedElementState} from './components/Rectangle/Rectangle'
 import {PageContainer} from './PageContainer'
 import {Toolbar} from './Toolbar'
 import {atom, useSetRecoilState, useRecoilValue} from 'recoil'
-
-export const selectedElementState = atom<number | null>({
-    key: 'selectedElement',
-    default: null,
-})
+import {EditProperties} from './EditProperties'
 
 export const elementsState = atom<number[]>({
     key: 'elements',
@@ -24,6 +19,7 @@ function Canvas() {
             }}
         >
             <Toolbar />
+            <EditProperties />
             {elements.map((id) => (
                 <Rectangle key={id} id={id} />
             ))}
