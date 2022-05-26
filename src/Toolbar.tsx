@@ -1,25 +1,27 @@
 import {Icon, IconButton, VStack} from '@chakra-ui/react'
-import {useContext} from 'react'
 import {Square} from 'react-feather'
-import {ElementsContext} from './Canvas'
+import {useSetRecoilState} from 'recoil'
+import {elementsState} from './Canvas'
 
 export const Toolbar = () => {
-    const {addElement} = useContext(ElementsContext)
+    const setElements = useSetRecoilState(elementsState)
 
     return (
         <VStack
-            position="absolute"
-            top="20px"
-            left="20px"
-            backgroundColor="white"
+            position='absolute'
+            top='20px'
+            left='20px'
+            backgroundColor='white'
             padding={2}
-            boxShadow="md"
-            borderRadius="md"
+            boxShadow='md'
+            borderRadius='md'
             spacing={2}
         >
             <IconButton
-                onClick={addElement}
-                aria-label="Add rectangle"
+                onClick={() => {
+                    setElements((elements) => [...elements, elements.length])
+                }}
+                aria-label='Add rectangle'
                 icon={<Icon style={{width: 24, height: 24}} as={Square} />}
             />
         </VStack>
